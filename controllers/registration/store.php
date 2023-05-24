@@ -36,18 +36,18 @@ $user = $db->query('select * from users where email = :email', [
 
 if ($user) {
     // If account exists, redirect
-    header('location: /');
+    header('location: /login');
     exit();
 } else {
     // If not, persist record //TODO hash the password!!
     $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
         'email' => $email,
-        'password' => $password
+        'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
     // Mark that the user has logged in
-    $_SESSION['user'] = [
+    login([
         'email' => $email
-    ];
+    ]);
 
     header('location: /notes');
     exit();
