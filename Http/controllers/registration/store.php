@@ -36,8 +36,7 @@ $user = $db->query('select * from users where email = :email', [
 
 if ($user) {
     // If account exists, redirect
-    header('location: /login');
-    exit();
+    redirect('/login');
 } else {
     // If not, persist record //TODO hash the password!!
     $db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
@@ -49,8 +48,7 @@ if ($user) {
         'email' => $email
     ]);
 
-    header('location: /notes');
-    exit();
+    redirect('/notes');
 }
 
 

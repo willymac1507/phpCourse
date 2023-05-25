@@ -28,6 +28,5 @@ $db->query('INSERT INTO notes(body, title, user_id) VALUES(:body, :title, :user_
     'title' => $_POST['title'],
     'user_id' => 1
 ]);
-header('location: /notes');
-exit();
+redirect('/notes');
 
